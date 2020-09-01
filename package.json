@@ -1,7 +1,7 @@
 {
   "name": "homebridge-octoprint-temp",
-  "version": "1.0.6",
-  "description": "Temperature view of your 3D printer through Octoprint",
+  "version": "1.1.0",
+  "description": "Temperature view of your 3D printer tool through Octoprint",
   "main": "index.js",
   "author": "Michael Steitz",
   "license": "MIT",
@@ -14,8 +14,7 @@
     "url": "https://github.com/msteitz/homebridge-octoprint-connect"
   },
   "dependencies": {
-    "request": ">=2.83.0",
-    "request-promise": ">=4.2.2"
+    "got": ">=11.5.2"
   },
   "engines": {
     "node": ">=0.12.0",
