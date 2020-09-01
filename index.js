@@ -95,31 +95,6 @@ OctoprintAccessory.prototype.getTargetHeatingCoolingState = function(callback) {
 };
 
 OctoprintAccessory.prototype.setTargetHeatingCoolingState = function(value, callback) {
-  if (value === Characteristic.TargetHeatingCoolingState.OFF) {
-//    this.log('Off target heating cooling state requested, cancelling job... POST ' + this.server + '/api/job');
-
-    var options = {
-      method: 'GET',
-      uri: this.server + '/api/job',
-      headers: {
-        "X-Api-Key": this.apiKey
-      },
-      body: {
-        "command": "cancel"
-      },
-      json: true
-    };
-
-    rp(options)
-      .then(function() {
-        console.log('Job cancelled');
-        callback(null);
-      })
-      .catch(function(error) {
-        callback(error);
-      });
-  }
-
   callback(null);
 };
 
@@ -170,31 +145,7 @@ OctoprintAccessory.prototype.getTargetTemperature = function(callback) {
 };
 
 OctoprintAccessory.prototype.setTargetTemperature = function(value, callback) {
-//  this.log('Setting target temperature... POST ' + this.server + '/api/printer/tool');
-
-  var options = {
-    method: 'POST',
-    uri: this.server + '/api/printer/tool',
-    headers: {
-      "X-Api-Key": this.apiKey
-    },
-    body: {
-      "command": "target",
-      "targets": {
-        "tool0": value
-      }
-    },
-    json: true
-  };
-
-  rp(options)
-    .then(function() {
-      console.log('Successfully set target temperature to ' + value);
-      callback(null);
-    })
-    .catch(function(error) {
-      callback(error);
-    });
+  callback(null);
 };
 
 OctoprintAccessory.prototype.getTemperatureDisplayUnits = function(callback) {
