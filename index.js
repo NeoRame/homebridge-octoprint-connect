@@ -71,7 +71,7 @@ OctoprintAccessory.prototype.getCurrentHeatingCoolingState = function(callback) 
 
   rp(options)
     .then(function(printerState) {
-      console.log('Retrieved printer state: ' + JSON.stringify(printerState));
+      //console.log('Retrieved printer state: ' + JSON.stringify(printerState));
       var currentTemperature = printerState.temperature.tool0.actual;
       var targetTemperature = printerState.temperature.tool0.target;
 
@@ -112,8 +112,9 @@ OctoprintAccessory.prototype.getCurrentTemperature = function(callback) {
 
   rp(options)
     .then(function(printerState) {
-      console.log('Retrieved current printer state: ' + JSON.stringify(printerState));
+      //console.log('Retrieved current printer state: ' + JSON.stringify(printerState));
       var currentTemperature = printerState.temperature.tool0.actual;
+      console.log(currentTemperature);
       callback(null, currentTemperature);
     })
     .catch(function(error) {
@@ -135,7 +136,7 @@ OctoprintAccessory.prototype.getTargetTemperature = function(callback) {
 
   rp(options)
     .then(function(printerState) {
-      console.log('Retrieved target printer state: ' + JSON.stringify(printerState));
+      //console.log('Retrieved target printer state: ' + JSON.stringify(printerState));
       var targetTemperature = printerState.temperature.tool0.target;
       callback(null, targetTemperature);
     })

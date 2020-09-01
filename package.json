@@ -1,6 +1,6 @@
 {
   "name": "homebridge-octoprint-temp",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Temperature view of your 3D printer through Octoprint",
   "main": "index.js",
   "author": "Michael Steitz",
