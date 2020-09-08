@@ -16,17 +16,32 @@ function OctoprintAccessory(log, config, api) {
   this.server = config["server"] || 'http://octopi.local';
   this.apiKey = config["api_key"];
 
-  this.currentHeatingCoolingState = Characteristic.CurrentHeatingCoolingState.OFF;
-  this.accessories = [];
-  this.service = new Service.TemperatureSensor(this.name);
+  this.HotEndTempService = new Service.TemperatureSensor(this.name + ' Extruder','1234');
+  this.BedTempService = new Service.TemperatureSensor(this.name + ' Bed','2468');
 
   //Required
-  this.service
+  this.HotEndTempService
     .getCharacteristic(Characteristic.CurrentTemperature)
-    .on('get', this.getCurrentTemperature.bind(this));
+    .setProps({
+      minValue: 0,
+      maxValue: 400
+    })
+    .on('get', this.getCurrentHotEndTemperature.bind(this));
+
+    this.BedTempService
+    .getCharacteristic(Characteristic.CurrentTemperature)
+    .setProps({
+      minValue: 0,
+      maxValue: 200
+    })
+    .on('get', this.getCurrentBedTemperature.bind(this));
 
   //Optional
-	this.service
+	this.HotEndTempService
+		.getCharacteristic(Characteristic.Name)
+    .on('get', this.getName.bind(this));
+  
+  	this.BedTempService
 		.getCharacteristic(Characteristic.Name)
 		.on('get', this.getName.bind(this));
 }
@@ -37,7 +52,7 @@ OctoprintAccessory.prototype.identify = function(callback) {
 };
 
 //Required
-OctoprintAccessory.prototype.getCurrentTemperature = function(callback) {
+OctoprintAccessory.prototype.getCurrentHotEndTemperature = function(callback) {
 //  this.log('Getting current temperature... GET ' + this.server + '/api/printer');
 
   var uri = this.server + '/api/printer';
@@ -60,11 +75,34 @@ OctoprintAccessory.prototype.getCurrentTemperature = function(callback) {
     })();
 };
 
+OctoprintAccessory.prototype.getCurrentBedTemperature = function(callback) {
+  //  this.log('Getting current temperature... GET ' + this.server + '/api/printer');
+  
+    var uri = this.server + '/api/printer';
+  
+    var options = {
+      headers: {
+        "X-Api-Key": this.apiKey
+      },
+    };
+  
+      (async () => {
+        try {
+          const response = await got(uri,options);
+          const jsonResponse = JSON.parse(response.body);
+          var currentTemperature =  jsonResponse.temperature.bed.actual;
+          callback(null, currentTemperature);
+        } catch (error) {
+          callback(error);
+        }
+      })();
+  };
+
 //Optional
 OctoprintAccessory.prototype.getName = function(callback) {
   callback(null, this.name);
 };
 
 OctoprintAccessory.prototype.getServices = function() {
-  return [this.service];
+  return [this.HotEndTempService, this.BedTempService];
 };
