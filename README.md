@@ -15,7 +15,7 @@ Add the following to your `config.json`. This is an example for a homebridge ins
         {
             "accessory": "Octoprint-Temp",
             "name": "Your printer name",
-            "server": "ip-address of your octoprint-server (if not specified by octopi.local",
+            "server": "ip-address of your octoprint-server (if not specified by octopi.local)",
             "api_key": "Your octoprint api-key"
         }
     ]
