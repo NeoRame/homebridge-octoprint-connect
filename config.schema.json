@@ -1,0 +1,25 @@
+{
+    "pluginAlias": "Octoprint-Temp",
+    "pluginType": "accessory",
+    "singular": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Printer-Name",
+          "type": "string",
+          "required": true
+        },
+        "server": {
+            "title": "Octoprint server address. Optional if it is already specified in octopi.local",
+            "type": "string",
+            "required": false
+        },
+        "api_key": {
+            "title": "Octoprint API-Key. Can be found in the Octoprint settings",
+            "type": "string",
+            "required": true
+        }
+      }
+    }
+  }
