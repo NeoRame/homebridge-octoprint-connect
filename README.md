@@ -6,7 +6,7 @@ I always wanted to see the heatbed and extruder temperature of my 3D-printer in 
 
 ## Config
 
-This plugin adds an accessory with two services, one for the extruder and one for the heatbed. In Homekit it will show up as one entity with two temperatures.
+This plugin adds an accessory with two services, one for the extruder and one for the heatbed. In Homekit it will show up as one entity with two temperatures. Make sure that CORS is enabled in the Octoprint settings (Settings -> API).
 
 If you are using the Homebridge-UI config schema is supported.
 
