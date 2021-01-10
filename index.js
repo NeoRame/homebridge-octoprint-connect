@@ -16,8 +16,8 @@ function OctoprintAccessory(log, config, api) {
   this.server = config["server"] || 'http://octopi.local';
   this.apiKey = config["api_key"];
 
-  this.HotEndTempService = new Service.TemperatureSensor(this.name + ' Extruder','1234');
-  this.BedTempService = new Service.TemperatureSensor(this.name + ' Bed','2468');
+  this.HotEndTempService = new Service.TemperatureSensor(this.name + ' Extruder', this.name + '1234');
+  this.BedTempService = new Service.TemperatureSensor(this.name + ' Bed', this.name + '2468');
 
   //Required
   this.HotEndTempService
@@ -44,6 +44,7 @@ function OctoprintAccessory(log, config, api) {
   	this.BedTempService
 		.getCharacteristic(Characteristic.Name)
 		.on('get', this.getName.bind(this));
+  this.log('Initialized');
 }
 
 OctoprintAccessory.prototype.identify = function(callback) {
