@@ -19,6 +19,10 @@
             "title": "Octoprint API-Key. Can be found in the Octoprint settings",
             "type": "string",
             "required": true
+        },
+        "debug": {
+            "title": "Use Debug",
+            "type": "boolean"
         }
       }
     }

@@ -15,6 +15,7 @@ function OctoprintAccessory(log, config, api) {
   this.name = config["name"];
   this.server = config["server"] || 'http://octopi.local';
   this.apiKey = config["api_key"];
+  this.debug = config["debug"];
 
   this.HotEndTempService = new Service.TemperatureSensor(this.name + ' Extruder', this.name + '1234');
   this.BedTempService = new Service.TemperatureSensor(this.name + ' Bed', this.name + '2468');
@@ -48,14 +49,17 @@ function OctoprintAccessory(log, config, api) {
 }
 
 OctoprintAccessory.prototype.identify = function(callback) {
-  //this.log('Identify requested');
+  if (this.debug) {
+    this.log('Identify requested');
+  }
   callback(null);
 };
 
 //Required
 OctoprintAccessory.prototype.getCurrentHotEndTemperature = function(callback) {
-//  this.log('Getting current temperature... GET ' + this.server + '/api/printer');
-
+  if (this.debug) {
+    this.log('Getting current temperatures from ' + this.server + '/api/printer');
+  }
   var uri = this.server + '/api/printer';
 
   var options = {
@@ -71,14 +75,15 @@ OctoprintAccessory.prototype.getCurrentHotEndTemperature = function(callback) {
         var currentTemperature =  jsonResponse.temperature.tool0.actual;
         callback(null, currentTemperature);
       } catch (error) {
+        if (this.debug) {
+	this.log('Error connecting: ' + error.message);
+        }
         callback(error);
       }
     })();
 };
 
 OctoprintAccessory.prototype.getCurrentBedTemperature = function(callback) {
-  //  this.log('Getting current temperature... GET ' + this.server + '/api/printer');
-  
     var uri = this.server + '/api/printer';
   
     var options = {

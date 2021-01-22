@@ -18,6 +18,7 @@ To manually config the plugin add the following to your `config.json`. This is a
             "accessory": "Octoprint-Temp",
             "name": "Your printer name",
             "server": "ip-address of your octoprint-server (if not specified by octopi.local)",
+	    "debug": false,
             "api_key": "Your octoprint api-key"
         }
     ]
