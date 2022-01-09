@@ -1,7 +1,7 @@
-var got = require("got");
+import got from "got";
 var Service, Characteristic;
 
-module.exports = function(homebridge) {
+export default function(homebridge) {
   console.log("homebridge API version: " + homebridge.version);
 
   Service = homebridge.hap.Service;
