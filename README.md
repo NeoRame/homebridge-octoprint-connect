@@ -1,5 +1,4 @@
 # homebridge-octoprint-temp
-[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins) 
 ## Purpose
 
 I always wanted to see the heatbed and extruder temperature of my 3D-printer in Homekit. So here is the homebridge-octoprint connection plugin for that.
